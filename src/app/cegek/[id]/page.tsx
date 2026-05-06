@@ -1,4 +1,4 @@
-export const revalidate = 0;
+export const revalidate = 3600; // 1 hour — refreshes after daily pipeline run
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChangesFeed from "@/components/ChangesFeed";
+import { JsonLd } from "@/components/JsonLd";
 import { getCompanyById, getCompanyBuildings, getCompanyPeople } from "@/lib/db/companies";
 import { getChangesByEntity } from "@/lib/db/changes";
 import { serviceTypeLabels, positionCategoryLabels, formatDate } from "@/lib/utils";
@@ -17,10 +18,37 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const company = await getCompanyById(id);
-  if (!company) return { title: "Cég nem található - FM Intel" };
+  if (!company) return { title: "Cég nem található" };
+
+  const serviceLabels = (company.service_types || [])
+    .map((t: string) => ({ fm: "Facility Management", pm: "Property Management", am: "Asset Management" }[t] || t)
+    ).join(", ");
+  const titleSuffix = [serviceLabels, company.headquarters_city].filter(Boolean).join(" · ");
+  const title = titleSuffix
+    ? `${company.name} | ${titleSuffix}`
+    : company.name;
+  const description =
+    company.description ||
+    `${company.name}${serviceLabels ? ` — ${serviceLabels} szolgáltató` : ""}${company.headquarters_city ? ` (${company.headquarters_city})` : ""}. Céginformációk, munkatársak és változástörténet az FM Intel platformon.`;
+
   return {
-    title: `${company.name} - FM Intel`,
-    description: company.description || `${company.name} céginformációk az FM Intel platformon.`,
+    title,
+    description,
+    keywords: [
+      company.name,
+      ...(company.service_types || []).map((t: string) =>
+        ({ fm: "facility management", pm: "property management", am: "asset management" }[t] || t)
+      ),
+      company.headquarters_city || "",
+      "FM Intel",
+    ].filter(Boolean),
+    alternates: { canonical: `https://www.fmintel.com/cegek/${id}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://www.fmintel.com/cegek/${id}`,
+      type: "profile",
+    },
   };
 }
 
@@ -67,8 +95,46 @@ export default async function CompanyProfilePage({ params }: PageProps) {
   const primaryService = company.service_types?.[0];
   const accentColor = primaryService ? (serviceColors[primaryService]?.color ?? "#0284c7") : "#0284c7";
 
+  const knowsAbout = (company.service_types || []).map((t: string) =>
+    ({ fm: "Facility Management", pm: "Property Management", am: "Asset Management" }[t] || t)
+  );
+
+  const companySchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `https://www.fmintel.com/cegek/${id}`,
+    name: company.name,
+    url: company.website || `https://www.fmintel.com/cegek/${id}`,
+    description: company.description || undefined,
+    ...(company.headquarters_city && {
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: company.headquarters_city,
+        addressCountry: "HU",
+      },
+    }),
+    ...(company.founded_year && { foundingDate: String(company.founded_year) }),
+    ...(company.employee_count_estimate && {
+      numberOfEmployees: {
+        "@type": "QuantitativeValue",
+        value: company.employee_count_estimate,
+      },
+    }),
+    ...(knowsAbout.length && { knowsAbout }),
+    ...(company.website && { sameAs: [company.website] }),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Főoldal", item: "https://www.fmintel.com" },
+        { "@type": "ListItem", position: 2, name: "Cégek", item: "https://www.fmintel.com/cegek" },
+        { "@type": "ListItem", position: 3, name: company.name, item: `https://www.fmintel.com/cegek/${id}` },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen" style={{ background: "#f0f5fb" }}>
+      <JsonLd data={companySchema} />
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }

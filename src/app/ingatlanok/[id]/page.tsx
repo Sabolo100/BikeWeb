@@ -1,4 +1,4 @@
-export const revalidate = 0;
+export const revalidate = 3600; // 1 hour
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChangesFeed from "@/components/ChangesFeed";
+import { JsonLd } from "@/components/JsonLd";
 import { getBuildingById, getBuildingManagement } from "@/lib/db/buildings";
 import { getChangesByEntity } from "@/lib/db/changes";
 import { buildingTypeLabels, serviceTypeLabels, formatDate, formatArea } from "@/lib/utils";
@@ -17,10 +18,39 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const building = await getBuildingById(id);
-  if (!building) return { title: "Ingatlan nem találahtó - FM Intel" };
+  if (!building) return { title: "Ingatlan nem található" };
+
+  const parts = [
+    building.building_class ? `${building.building_class} osztály` : null,
+    building.total_area_sqm ? `${building.total_area_sqm.toLocaleString("hu-HU")} m²` : null,
+    building.city || null,
+  ].filter(Boolean);
+  const title = parts.length
+    ? `${building.name} | ${parts.join(", ")}`
+    : building.name;
+  const typeLabel = buildingTypeLabels[building.building_type as keyof typeof buildingTypeLabels] || building.building_type;
+  const description =
+    building.description ||
+    `${building.name} — ${typeLabel}${building.building_class ? `, ${building.building_class} kategória` : ""}${building.city ? `, ${building.city}` : ""}. Kezelő cégek, területadatok és változástörténet az FM Intel platformon.`;
+
   return {
-    title: `${building.name} - FM Intel`,
-    description: building.description || `${building.name} ingatlan részletek az FM Intel platformon.`,
+    title,
+    description,
+    keywords: [
+      building.name,
+      typeLabel,
+      building.city,
+      building.building_class || "",
+      "kereskedelmi ingatlan",
+      "FM Intel",
+    ].filter(Boolean),
+    alternates: { canonical: `https://www.fmintel.com/ingatlanok/${id}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://www.fmintel.com/ingatlanok/${id}`,
+      type: "article",
+    },
   };
 }
 
@@ -66,8 +96,72 @@ export default async function BuildingProfilePage({ params }: PageProps) {
     ? (buildingClassColors[building.building_class] ?? buildingClassColors["C"])
     : buildingClassColors["C"];
 
+  const buildingSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "@id": `https://www.fmintel.com/ingatlanok/${id}`,
+    name: building.name,
+    description: building.description || undefined,
+    ...(building.address || building.city
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            ...(building.address && { streetAddress: building.address }),
+            addressLocality: building.city || "Budapest",
+            ...(building.zip_code && { postalCode: building.zip_code }),
+            addressCountry: "HU",
+          },
+        }
+      : {}),
+    ...(building.latitude && building.longitude
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: building.latitude,
+            longitude: building.longitude,
+          },
+        }
+      : {}),
+    additionalProperty: [
+      building.building_class && {
+        "@type": "PropertyValue",
+        name: "Épületkategória",
+        value: building.building_class,
+      },
+      building.total_area_sqm && {
+        "@type": "PropertyValue",
+        name: "Teljes terület (m²)",
+        value: building.total_area_sqm,
+      },
+      building.leasable_area_sqm && {
+        "@type": "PropertyValue",
+        name: "Bérelhető terület (m²)",
+        value: building.leasable_area_sqm,
+      },
+      building.floors && {
+        "@type": "PropertyValue",
+        name: "Emeletszám",
+        value: building.floors,
+      },
+      building.year_built && {
+        "@type": "PropertyValue",
+        name: "Építés éve",
+        value: building.year_built,
+      },
+    ].filter(Boolean),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Főoldal", item: "https://www.fmintel.com" },
+        { "@type": "ListItem", position: 2, name: "Ingatlanok", item: "https://www.fmintel.com/ingatlanok" },
+        { "@type": "ListItem", position: 3, name: building.name, item: `https://www.fmintel.com/ingatlanok/${id}` },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen" style={{ background: "#f0f5fb" }}>
+      <JsonLd data={buildingSchema} />
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }

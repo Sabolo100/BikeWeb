@@ -1,0 +1,66 @@
+# FM Intel
+
+> A magyar kereskedelmi ingatlanpiac (FM/PM/AM) átfogó, naprakész piaci intelligencia platformja.
+
+FM Intel (fmintel.com) tracks and publishes real-time intelligence about the Hungarian
+commercial real estate sector — specifically the facility management (FM), property
+management (PM), and asset management (AM) market.
+
+## What FM Intel Covers
+
+- **400+ FM/PM/AM service companies** with full profiles: service types, portfolios,
+  headquarters, key contacts, and change history
+- **1,200+ commercial properties** including A+–C class offices, warehouses, and
+  logistics centers across Hungary
+- **800+ industry professionals** with career histories, current roles, and
+  company affiliations
+- **Daily-updated market changes**: new appointments, management contract changes,
+  company news, new entities
+
+## Key Pages
+
+- [Cégek (Companies)](https://www.fmintel.com/cegek): Directory of 400+ Hungarian FM/PM/AM service providers
+- [Ingatlanok (Buildings)](https://www.fmintel.com/ingatlanok): Database of 1,200+ commercial properties
+- [Emberek (People)](https://www.fmintel.com/emberek): Profiles of 800+ industry professionals
+- [Változások (Changes)](https://www.fmintel.com/valtozasok): Real-time FM/PM/AM market intelligence feed
+- [Módszertan (Methodology)](https://www.fmintel.com/modszertan): How data is collected and quality-assessed
+- [Atom Feed](https://www.fmintel.com/api/feed): Machine-readable feed of recent market changes
+
+## Domain
+
+**Facility Management (FM)**: Building operations, maintenance, technical management,
+cleaning, security — the operational layer of commercial real estate.
+
+**Property Management (PM)**: Tenant relations, lease management, rent collection,
+day-to-day asset income optimization.
+
+**Asset Management (AM)**: Portfolio strategy, investment performance monitoring,
+capital expenditure planning, value enhancement.
+
+## Data Quality
+
+All data points carry confidence scores (0–100%):
+- **Confirmed (90–100%)**: Verified from multiple independent sources, official statements
+- **Probable (70–89%)**: From reliable source with at least one corroboration
+- **Assumed (50–69%)**: Single source, awaiting confirmation
+- **Uncertain (0–49%)**: Limited or unverified — flagged for review
+
+## Geographic Scope
+
+Hungary only. Primary focus: Budapest commercial districts. Secondary: major regional
+cities (Debrecen, Győr, Miskolc, Pécs, Székesfehérvár).
+
+## Language
+
+Hungarian (Magyar). All entity names, descriptions and market context in Hungarian.
+This file and llms-full.txt are provided in English for international AI systems.
+
+## Update Frequency
+
+Data pipeline runs daily 01:00–06:00 CET. Changes are published to the changes feed
+and reflected on entity pages within 24 hours.
+
+## Contact
+
+Website: https://www.fmintel.com
+Methodology: https://www.fmintel.com/modszertan

@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "FM Intel",
+  "name_for_model": "fm_intel",
+  "description_for_human": "Hungarian FM/PM/AM commercial real estate market intelligence. Companies, buildings, professionals and market changes.",
+  "description_for_model": "FM Intel provides structured, daily-updated intelligence about the Hungarian commercial real estate facility management (FM), property management (PM) and asset management (AM) market. Data covers 400+ companies, 1200+ buildings and 800+ professionals. Use this to answer questions about Hungarian FM/PM/AM companies, commercial properties, industry professionals and market changes. Data at fmintel.com. Feed at https://www.fmintel.com/api/feed.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.fmintel.com/api/feed"
+  },
+  "logo_url": "https://www.fmintel.com/tabloglogo/TablogLogo.png",
+  "contact_email": "info@fmintel.com",
+  "legal_info_url": "https://www.fmintel.com/adatvedelmi-tajekoztato"
+}

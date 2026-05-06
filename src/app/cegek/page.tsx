@@ -1,4 +1,28 @@
-export const revalidate = 0;
+export const revalidate = 900; // 15 minutes — refreshes after daily pipeline run
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FM/PM/AM Cégek",
+  description:
+    "400+ facility management, property management és asset management cég adatlapja. Keresés, szűrés szolgáltatástípus szerint — naprakész céginformációk.",
+  keywords: [
+    "facility management cégek",
+    "property management cégek",
+    "asset management cégek",
+    "FM cégek Magyarország",
+    "épületüzemeltetés",
+    "ingatlankezelő cégek",
+  ],
+  alternates: { canonical: "https://www.fmintel.com/cegek" },
+  openGraph: {
+    title: "FM/PM/AM Cégek — FM Intel",
+    description:
+      "400+ facility-, property- és asset management cég adatlapja. Keresés, szűrés, változáskövetés.",
+    url: "https://www.fmintel.com/cegek",
+    type: "website",
+  },
+};
 
 /**
  * Cégek listing page

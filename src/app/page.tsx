@@ -1,4 +1,20 @@
-export const revalidate = 0;
+export const revalidate = 300; // 5 minutes
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FM Intel — Magyar FM/PM/AM Piaci Intelligencia",
+  description:
+    "A magyar kereskedelmi ingatlanpiac facility management, property management és asset management szektorának átfogó adatbázisa. 400+ cég, 1 200+ ingatlan, 800+ szakember — naprakészen.",
+  alternates: { canonical: "https://www.fmintel.com" },
+  openGraph: {
+    title: "FM Intel — Magyar FM/PM/AM Piaci Intelligencia",
+    description:
+      "400+ FM/PM/AM cég, 1 200+ kereskedelmi ingatlan, 800+ szakember. Napi frissítésű piaci intelligencia.",
+    url: "https://www.fmintel.com",
+    type: "website",
+  },
+};
 
 /**
  * Homepage

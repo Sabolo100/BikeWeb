@@ -1,4 +1,32 @@
-export const revalidate = 0;
+export const revalidate = 300; // 5 minutes — changes feed updates frequently
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Piaci Változások",
+  description:
+    "Napi FM/PM/AM piaci változásfeed: kinevezések, kezelőváltások, új cégek és ingatlanok. A magyar kereskedelmi ingatlanpiac legfrissebb mozgásai.",
+  keywords: [
+    "FM piaci változások",
+    "ingatlanpiac hírek",
+    "facility management kinevezés",
+    "kezelőváltás",
+    "property management változás",
+  ],
+  alternates: {
+    canonical: "https://www.fmintel.com/valtozasok",
+    types: {
+      "application/atom+xml": "https://www.fmintel.com/api/feed",
+    },
+  },
+  openGraph: {
+    title: "Piaci Változások — FM Intel",
+    description:
+      "Napi FM/PM/AM piaci változásfeed: kinevezések, kezelőváltások, új entitások.",
+    url: "https://www.fmintel.com/valtozasok",
+    type: "website",
+  },
+};
 
 /**
  * Változások (Changes feed) page

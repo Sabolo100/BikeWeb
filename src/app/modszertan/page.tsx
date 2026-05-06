@@ -1,5 +1,68 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Módszertan",
+  description:
+    "Hogyan gyűjti, ellenőrzi és tartja naprakészen az FM Intel a magyar kereskedelmi ingatlanpiac FM/PM/AM adatait. Adatforrások, pipeline, bizonyossági szintek.",
+  alternates: { canonical: "https://www.fmintel.com/modszertan" },
+  openGraph: {
+    title: "Módszertan — FM Intel",
+    description:
+      "Az FM Intel adatgyűjtési folyamata: napi automatizált kutatási ciklus, AI-alapú extrakció, bizonyossági szintek.",
+    url: "https://www.fmintel.com/modszertan",
+    type: "article",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Hogyan működik az FM Intel adatgyűjtési folyamata?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Az FM Intel naponta háromfázisú pipeline-t futtat: (1) Automatizált webpásztázás hírportálokat, cégoldalakat és ingatlan-adatbázisokat; (2) AI-alapú entitás-extrakció és normalizálás; (3) Adatbázis-integráció változásnaplózással. A ciklus 01:00–06:00 CET között zajlik.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Mit jelent a bizonyossági szint az FM Intelnél?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Minden adatpontot 0–100%-os bizonyossági pontszámmal látunk el: Megerősített (90–100%): több független forrásból igazolt; Valószínű (70–89%): megbízható, legalább egy másik forrás által támogatott; Feltételezett (50–69%): egyetlen forrásból, még nem megerősített; Bizonytalan (0–49%): korlátolt vagy ellenőrizetlen adat.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Milyen forrásokból gyűjt adatot az FM Intel?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Öt fő forrástípus: (1) Hírportálok (portfolio.hu, property-magazine.eu, fn.hu); (2) FM/PM/AM cégweboldalak rendszeres crawlal; (3) Ingatlanportálok (CBRE, JLL, Cushman & Wakefield); (4) Céginformációs adatbázisok (Cégbíróság, KSH, e-cégjegyzék); (5) Szakmai profilok (LinkedIn publikus adatok).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Milyen entitástípusokat követ az FM Intel?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Három entitástípust: Cégek (400+ FM/PM/AM szolgáltató), Ingatlanok (1200+ kereskedelmi ingatlan: irodák, raktárak, logisztikai központok) és Emberek (800+ iparági szakember karrierútjával és aktuális pozíciójával).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Mi a különbség a facility management, property management és asset management között?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Facility Management (FM): az épület operatív üzemeltetése — karbantartás, takarítás, biztonság, technikai szolgáltatások. Property Management (PM): bérlői kapcsolatok kezelése, bérleti díj, üresedés minimalizálása, bevételoptimalizálás. Asset Management (AM): portfólióstratégia, befektetési teljesítmény, értéknövelés és tőkekiadások tervezése.",
+      },
+    },
+  ],
+};
 
 const pipelineSteps = [
   {
@@ -116,6 +179,7 @@ const dataSources = [
 export default function ModszertanPage() {
   return (
     <div className="min-h-screen" style={{ background: "#f0f5fb" }}>
+      <JsonLd data={faqSchema} />
       <Header />
 
       {/* ── HERO ─────────────────────────────────────────── */}

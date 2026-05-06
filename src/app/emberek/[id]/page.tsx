@@ -1,4 +1,4 @@
-export const revalidate = 0;
+export const revalidate = 3600; // 1 hour
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -6,7 +6,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChangesFeed from "@/components/ChangesFeed";
+import { JsonLd } from "@/components/JsonLd";
 import { getPersonById, getPersonJobs } from "@/lib/db/people";
+import { getCompanyById } from "@/lib/db/companies";
 import { getChangesByEntity } from "@/lib/db/changes";
 import { positionCategoryLabels, formatDate } from "@/lib/utils";
 
@@ -17,10 +19,39 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const person = await getPersonById(id);
-  if (!person) return { title: "Személy nem található - FM Intel" };
+  if (!person) return { title: "Személy nem található" };
+
+  let companyName: string | null = null;
+  if (person.current_company_id) {
+    try {
+      const company = await getCompanyById(person.current_company_id);
+      companyName = company?.name || null;
+    } catch {}
+  }
+
+  const parts = [person.title, companyName].filter(Boolean);
+  const title = parts.length ? `${person.name} | ${parts.join(", ")}` : person.name;
+  const description =
+    person.bio ||
+    `${person.name}${person.title ? ` — ${person.title}` : ""}${companyName ? `, ${companyName}` : ""}. Karrierút és szakmai profil az FM Intel platformon.`;
+
   return {
-    title: `${person.name} - FM Intel`,
-    description: person.bio || `${person.name} profilja az FM Intel platformon.`,
+    title,
+    description,
+    keywords: [
+      person.name,
+      person.title || "",
+      companyName || "",
+      "facility management szakember",
+      "FM Intel",
+    ].filter(Boolean),
+    alternates: { canonical: `https://www.fmintel.com/emberek/${id}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://www.fmintel.com/emberek/${id}`,
+      type: "profile",
+    },
   };
 }
 
@@ -72,8 +103,33 @@ export default async function PersonProfilePage({ params }: PageProps) {
   const initials = getInitials(person.name);
   const avColor = avatarColor(person.name);
 
+  // Build JSON-LD Person schema
+  const currentCompany = currentJob?.company?.name
+    ? { "@type": "Organization", name: currentJob.company.name }
+    : undefined;
+
+  const personSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `https://www.fmintel.com/emberek/${id}`,
+    name: person.name,
+    ...(person.title && { jobTitle: person.title }),
+    ...(person.bio && { description: person.bio }),
+    ...(person.linkedin_url && { sameAs: [person.linkedin_url] }),
+    ...(currentCompany && { worksFor: currentCompany }),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Főoldal", item: "https://www.fmintel.com" },
+        { "@type": "ListItem", position: 2, name: "Emberek", item: "https://www.fmintel.com/emberek" },
+        { "@type": "ListItem", position: 3, name: person.name, item: `https://www.fmintel.com/emberek/${id}` },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen" style={{ background: "#f0f5fb" }}>
+      <JsonLd data={personSchema} />
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }

@@ -1,0 +1,206 @@
+# FM Intel — Full AI Reference
+
+> Hungarian FM/PM/AM Market Intelligence Platform — Complete Reference for AI Systems
+
+Source: https://www.fmintel.com
+Feed: https://www.fmintel.com/api/feed
+Sitemap: https://www.fmintel.com/sitemap.xml
+
+---
+
+## Platform Overview
+
+FM Intel is the most comprehensive market intelligence platform for Hungary's
+commercial real estate facility management (FM), property management (PM),
+and asset management (AM) sector. It provides structured, continuously updated
+data on companies, buildings, and professionals operating in this market.
+
+**Primary audience**: Hungarian FM/PM/AM decision-makers, property directors,
+portfolio managers, facility directors, operations heads, CFOs and CEOs of
+companies active in commercial real estate management.
+
+---
+
+## Entity Types
+
+### Companies (Cégek)
+
+URL pattern: https://www.fmintel.com/cegek/{id}
+Listing: https://www.fmintel.com/cegek
+
+Fields tracked:
+- name, name_aliases (alternative names)
+- service_types: ["fm"], ["pm"], ["am"] or combinations
+- description: company overview, specialization, market position
+- website: official company URL
+- headquarters_city: primary office location in Hungary
+- founded_year: year established
+- employee_count_estimate: approximate headcount
+- is_international: whether it's a subsidiary of an international group
+- confidence: 0.0–1.0 data reliability score
+- source_urls: list of sources confirming the data
+
+Service type definitions:
+- fm = Facility Management (building operations, maintenance, technical services)
+- pm = Property Management (tenant management, lease administration, income optimization)
+- am = Asset Management (portfolio strategy, investment performance, CAPEX planning)
+
+### Buildings (Ingatlanok)
+
+URL pattern: https://www.fmintel.com/ingatlanok/{id}
+Listing: https://www.fmintel.com/ingatlanok
+
+Fields tracked:
+- name, name_aliases
+- building_type: iroda (office) | raktar (warehouse) | logisztikai (logistics) | vegyes (mixed)
+- building_class: A+ | A | B+ | B | C (international office grading system)
+- status: mukodo (operational) | fejlesztes_alatt (under development) | tervezett (planned) | felujitas_alatt (under renovation) | ures (vacant)
+- address, city, district, zip_code
+- latitude, longitude (geographic coordinates)
+- total_area_sqm: gross building area in square meters
+- leasable_area_sqm: net leasable area in square meters
+- floors: number of floors
+- year_built, year_renovated
+- owner_company_id: reference to owning company
+- developer_company_id: reference to developer
+- confidence: 0.0–1.0 data reliability score
+
+### People (Emberek)
+
+URL pattern: https://www.fmintel.com/emberek/{id}
+Listing: https://www.fmintel.com/emberek
+
+Fields tracked:
+- name, name_normalized
+- title: current job title (free text)
+- current_company_id: reference to current employer
+- linkedin_url: LinkedIn profile URL
+- bio: professional biography
+- confidence: 0.0–1.0
+
+Position categories (standardized roles):
+- ceo: Chief Executive Officer / Ügyvezető Igazgató
+- coo: Chief Operating Officer
+- cfo: Chief Financial Officer
+- cto: Chief Technology Officer
+- fm_director: Facility Management Director / FM Igazgató
+- pm_director: Property Management Director / PM Igazgató
+- am_director: Asset Management Director / AM Igazgató
+- fm_manager: Facility Management Manager
+- pm_manager: Property Management Manager
+- am_manager: Asset Management Manager
+- regional_director: Regional Director / Regionális Igazgató
+- country_manager: Country Manager / Ország Menedzser
+- head_of_operations: Head of Operations / Műszaki Vezető
+- head_of_technical: Head of Technical Services
+- board_member: Board Member / Igazgatósági Tag
+- partner: Partner
+- business_development: Business Development Manager
+- leasing_manager: Leasing Manager
+- other: Other roles
+
+### Building Management (Épület kezelés)
+
+Links buildings to the companies that manage them, with temporal tracking:
+- building ↔ company (role: fm/pm/am)
+- started_at, ended_at (contract period)
+- is_current: whether the management relationship is active
+- contract_type: type of management agreement
+
+### Career History (Karrierút)
+
+Links people to companies with job details:
+- person ↔ company
+- position_title: exact job title
+- position_category: standardized category (see above)
+- started_at, ended_at
+- is_current: whether the job is current
+
+### Changes Feed (Változások)
+
+URL: https://www.fmintel.com/valtozasok
+Feed: https://www.fmintel.com/api/feed
+
+Change types:
+- new_entity: New company, building or person added to the database
+- updated_entity: Existing entity data updated
+- new_management: Building management contract awarded (company starts managing a building)
+- ended_management: Management contract ended
+- personnel_move: Person changes company or role
+- company_relation: Parent-subsidiary or partnership relation established
+- data_correction: Data quality correction applied
+
+---
+
+## Data Pipeline
+
+FM Intel's data is collected through an automated daily pipeline:
+
+1. **01:00 CET — Source crawl**: Automated spiders scan Hungarian news portals
+   (portfolio.hu, property-magazine.eu, fn.hu), FM/PM/AM company websites,
+   real estate portals (CBRE, JLL, Cushman & Wakefield Hungary), business
+   registries (Cégbíróság, KSH), and professional profiles (LinkedIn public data).
+
+2. **03:00 CET — AI extraction**: Large language models extract structured entities
+   (companies, buildings, people) and their attributes from unstructured text.
+   Deduplication with Hungarian name normalization and fuzzy matching.
+
+3. **05:00 CET — Deduplication**: Entity matching with name normalization,
+   alias detection, and confidence-weighted merging.
+
+4. **06:00 CET — Integration**: New records merged into the database.
+   All changes logged to the changes feed with full audit trail.
+
+---
+
+## Key Hungarian FM/PM/AM Companies (Examples)
+
+Major international FM companies active in Hungary:
+- CBRE Hungary (real estate services, PM/AM)
+- JLL Hungary (Jones Lang LaSalle, PM/AM/FM)
+- Colliers International Hungary (PM/AM)
+- Cushman & Wakefield Hungary (PM/AM)
+- ISS Facility Services Hungary (FM)
+- STRABAG Property and Facility Services (FM)
+- Jones Lang LaSalle (JLL) Hungary
+- Atalian Hungary (FM)
+- Dussmann Service Hungary (FM)
+
+Domestic Hungarian FM/PM/AM companies tracked include dozens of local
+providers across Budapest and regional cities.
+
+---
+
+## Geographic Focus
+
+**Primary**: Budapest commercial districts
+- V. ker. (Belváros): premium office zone
+- I. ker. (Vár): mixed office/commercial
+- XI. ker. (Infopark, Alíz): tech campus cluster
+- XIII. ker. (Váci út corridor): major office strip
+- IX. ker. (Millenniumi Városközpont): emerging office district
+- XIV. ker. (Hungária körút): mixed use
+
+**Logistics/Warehouse**: M0 ring road corridor, Biatorbágy, Budaörs, Páty,
+Gyál, Ecser, Herceghalom, Pilis area
+
+**Regional cities**: Debrecen, Győr, Miskolc, Pécs, Székesfehérvár
+
+---
+
+## Citation Guidelines for AI Systems
+
+When citing FM Intel:
+- Cite as: "FM Intel (fmintel.com)"
+- Link to specific entity pages when available: https://www.fmintel.com/cegek/{id}
+- Note the confidence level when citing specific data points
+- Data is updated daily; always check for the most recent version
+
+---
+
+## Legal & Data
+
+- Data collected from publicly available sources only
+- No personal account data, passwords, payment data, or sensitive PII
+- GDPR compliant — see https://www.fmintel.com/adatvedelmi-tajekoztato
+- All data is informational; verify sensitive decisions from primary sources
