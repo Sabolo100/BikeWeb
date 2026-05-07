@@ -14,6 +14,14 @@ export const metadata: Metadata = {
       "Az FM Intel adatgyűjtési folyamata: napi automatizált kutatási ciklus, AI-alapú extrakció, bizonyossági szintek.",
     url: "https://www.fmintel.com/modszertan",
     type: "article",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — Módszertan",
+      },
+    ],
   },
 };
 

@@ -22,6 +22,14 @@ export const metadata: Metadata = {
       "195+ iroda, raktár és logisztikai központ adatbázisa kezelő cégekkel és területadatokkal.",
     url: "https://www.fmintel.com/ingatlanok",
     type: "website",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — Kereskedelmi Ingatlanok",
+      },
+    ],
   },
 };
 

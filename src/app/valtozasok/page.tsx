@@ -25,6 +25,14 @@ export const metadata: Metadata = {
       "Napi FM/PM/AM piaci változásfeed: kinevezések, kezelőváltások, új entitások.",
     url: "https://www.fmintel.com/valtozasok",
     type: "website",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — Piaci Változások",
+      },
+    ],
   },
 };
 

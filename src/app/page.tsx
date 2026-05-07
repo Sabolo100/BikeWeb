@@ -13,6 +13,14 @@ export const metadata: Metadata = {
       "130+ FM/PM/AM cég, 195+ kereskedelmi ingatlan, 540+ szakember. Napi frissítésű piaci intelligencia.",
     url: "https://www.fmintel.com",
     type: "website",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — Magyar FM/PM/AM Piaci Intelligencia",
+      },
+    ],
   },
 };
 

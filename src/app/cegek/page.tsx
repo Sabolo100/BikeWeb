@@ -21,6 +21,14 @@ export const metadata: Metadata = {
       "130+ facility-, property- és asset management cég adatlapja. Keresés, szűrés, változáskövetés.",
     url: "https://www.fmintel.com/cegek",
     type: "website",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — FM/PM/AM Cégek",
+      },
+    ],
   },
 };
 

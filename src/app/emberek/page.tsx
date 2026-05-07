@@ -20,6 +20,14 @@ export const metadata: Metadata = {
       "540+ iparági szakember karrierútja és aktuális pozíciója. Keresés pozíció és cég szerint.",
     url: "https://www.fmintel.com/emberek",
     type: "website",
+    images: [
+      {
+        url: "https://www.fmintel.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FM Intel — FM/PM/AM Szakemberek",
+      },
+    ],
   },
 };
 
