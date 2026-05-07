@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "FM Intel",
     images: [
       {
-        url: "/opengraph-image",
+        url: "https://www.fmintel.com/opengraph-image",
         width: 1200,
         height: 630,
         alt: "FM Intel — Magyar FM/PM/AM Piaci Intelligencia",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "FM Intel | Piaci Intelligencia",
     description:
       "Magyar FM/PM/AM piaci intelligencia platform — facility, property és asset management adatok.",
-    images: ["/opengraph-image"],
+    images: ["https://www.fmintel.com/opengraph-image"],
   },
   alternates: {
     canonical: "https://www.fmintel.com",
