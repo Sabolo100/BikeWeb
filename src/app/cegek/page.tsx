@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FM/PM/AM Cégek",
   description:
-    "400+ facility management, property management és asset management cég adatlapja. Keresés, szűrés szolgáltatástípus szerint — naprakész céginformációk.",
+    "130+ facility management, property management és asset management cég adatlapja. Keresés, szűrés szolgáltatástípus szerint — naprakész céginformációk.",
   keywords: [
     "facility management cégek",
     "property management cégek",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FM/PM/AM Cégek — FM Intel",
     description:
-      "400+ facility-, property- és asset management cég adatlapja. Keresés, szűrés, változáskövetés.",
+      "130+ facility-, property- és asset management cég adatlapja. Keresés, szűrés, változáskövetés.",
     url: "https://www.fmintel.com/cegek",
     type: "website",
   },

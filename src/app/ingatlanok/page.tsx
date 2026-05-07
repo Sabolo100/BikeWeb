@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kereskedelmi Ingatlanok",
   description:
-    "1 200+ kereskedelmi ingatlan adatbázisa: A+–C osztályú irodaházak, raktárak és logisztikai központok. Kezelő cégek, területadatok és változástörténet.",
+    "195+ kereskedelmi ingatlan adatbázisa: A+–C osztályú irodaházak, raktárak és logisztikai központok. Kezelő cégek, területadatok és változástörténet.",
   keywords: [
     "kereskedelmi ingatlanok",
     "irodaházak Budapest",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kereskedelmi Ingatlanok — FM Intel",
     description:
-      "1 200+ iroda, raktár és logisztikai központ adatbázisa kezelő cégekkel és területadatokkal.",
+      "195+ iroda, raktár és logisztikai központ adatbázisa kezelő cégekkel és területadatokkal.",
     url: "https://www.fmintel.com/ingatlanok",
     type: "website",
   },

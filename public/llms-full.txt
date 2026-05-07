@@ -19,6 +19,12 @@ data on companies, buildings, and professionals operating in this market.
 portfolio managers, facility directors, operations heads, CFOs and CEOs of
 companies active in commercial real estate management.
 
+## Current Coverage (as of 2025)
+
+- **130+ companies**: FM, PM, and AM service providers tracked
+- **195+ commercial properties**: offices, warehouses, logistics centers
+- **540+ professionals**: career histories, current roles, company affiliations
+
 ---
 
 ## Entity Types

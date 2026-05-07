@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FM/PM/AM Szakemberek",
   description:
-    "800+ facility management, property management és asset management szakember karrierútja, aktuális pozíciója és céges kapcsolatai — naprakész adatbázis.",
+    "540+ facility management, property management és asset management szakember karrierútja, aktuális pozíciója és céges kapcsolatai — naprakész adatbázis.",
   keywords: [
     "facility management szakemberek",
     "property management vezető",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FM/PM/AM Szakemberek — FM Intel",
     description:
-      "800+ iparági szakember karrierútja és aktuális pozíciója. Keresés pozíció és cég szerint.",
+      "540+ iparági szakember karrierútja és aktuális pozíciója. Keresés pozíció és cég szerint.",
     url: "https://www.fmintel.com/emberek",
     type: "website",
   },

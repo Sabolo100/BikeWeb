@@ -101,9 +101,9 @@ export default function Image() {
           }}
         >
           {[
-            { n: "400+", label: "FM/PM/AM Cég" },
-            { n: "1 200+", label: "Ingatlan" },
-            { n: "800+", label: "Szakember" },
+            { n: "130+", label: "FM/PM/AM Cég" },
+            { n: "195+", label: "Ingatlan" },
+            { n: "540+", label: "Szakember" },
           ].map((s, i) => (
             <div
               key={i}

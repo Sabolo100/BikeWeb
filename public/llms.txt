@@ -8,20 +8,20 @@ management (PM), and asset management (AM) market.
 
 ## What FM Intel Covers
 
-- **400+ FM/PM/AM service companies** with full profiles: service types, portfolios,
+- **130+ FM/PM/AM service companies** with full profiles: service types, portfolios,
   headquarters, key contacts, and change history
-- **1,200+ commercial properties** including A+–C class offices, warehouses, and
+- **195+ commercial properties** including A+–C class offices, warehouses, and
   logistics centers across Hungary
-- **800+ industry professionals** with career histories, current roles, and
+- **540+ industry professionals** with career histories, current roles, and
   company affiliations
 - **Daily-updated market changes**: new appointments, management contract changes,
   company news, new entities
 
 ## Key Pages
 
-- [Cégek (Companies)](https://www.fmintel.com/cegek): Directory of 400+ Hungarian FM/PM/AM service providers
-- [Ingatlanok (Buildings)](https://www.fmintel.com/ingatlanok): Database of 1,200+ commercial properties
-- [Emberek (People)](https://www.fmintel.com/emberek): Profiles of 800+ industry professionals
+- [Cégek (Companies)](https://www.fmintel.com/cegek): Directory of 130+ Hungarian FM/PM/AM service providers
+- [Ingatlanok (Buildings)](https://www.fmintel.com/ingatlanok): Database of 195+ commercial properties
+- [Emberek (People)](https://www.fmintel.com/emberek): Profiles of 540+ industry professionals
 - [Változások (Changes)](https://www.fmintel.com/valtozasok): Real-time FM/PM/AM market intelligence feed
 - [Módszertan (Methodology)](https://www.fmintel.com/modszertan): How data is collected and quality-assessed
 - [Atom Feed](https://www.fmintel.com/api/feed): Machine-readable feed of recent market changes

@@ -50,7 +50,7 @@ const faqSchema = {
       name: "Milyen entitástípusokat követ az FM Intel?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Három entitástípust: Cégek (400+ FM/PM/AM szolgáltató), Ingatlanok (1200+ kereskedelmi ingatlan: irodák, raktárak, logisztikai központok) és Emberek (800+ iparági szakember karrierútjával és aktuális pozíciójával).",
+        text: "Három entitástípust: Cégek (130+ FM/PM/AM szolgáltató), Ingatlanok (195+ kereskedelmi ingatlan: irodák, raktárak, logisztikai központok) és Emberek (540+ iparági szakember karrierútjával és aktuális pozíciójával).",
       },
     },
     {
@@ -130,7 +130,7 @@ const entityTypes = [
   {
     label: "FM · PM · AM",
     title: "Cégek",
-    stat: "~400+",
+    stat: "130+",
     statLabel: "nyomon követett vállalat",
     description:
       "Facility management, property management és asset management szolgáltatók teljes profiljukkal: szolgáltatástípusok, portfólió méret, kontaktszemélyek és változáshistória.",
@@ -143,7 +143,7 @@ const entityTypes = [
   {
     label: "IRODA · RAKTÁR · LOGISZTIKA",
     title: "Ingatlanok",
-    stat: "~1 200+",
+    stat: "195+",
     statLabel: "kereskedelmi ingatlan",
     description:
       "Irodaházak, raktárak, logisztikai központok. Minden rekordhoz típus, épületkategória (A+–C), bérelhető terület és aktuális FM/PM/AM megbízott.",
@@ -156,7 +156,7 @@ const entityTypes = [
   {
     label: "VEZETŐ · DÖNTÉSHOZÓ",
     title: "Emberek",
-    stat: "~800+",
+    stat: "540+",
     statLabel: "szakmai szereplő",
     description:
       "Iparági vezetők és döntéshozók teljes karrierútjukkal. Pozícióváltások, cégkapcsolatok és aktuális megbízatások valós idejű követése.",
